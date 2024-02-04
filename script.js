@@ -39,7 +39,7 @@ const VoiceRSS = {
     (t.onreadystatechange = function () {
       if (4 == t.readyState && 200 == t.status) {
         if (0 == t.responseText.indexOf("ERROR")) throw t.responseText;
-        new Audio(t.responseText).play();
+        (audioElement.src = t.responseText), audioElement.play();
       }
     }),
       t.open("POST", "https://api.voicerss.org/", !0),
@@ -52,23 +52,23 @@ const VoiceRSS = {
   _buildRequest: function (e) {
     var a = e.c && "auto" != e.c.toLowerCase() ? e.c : this._detectCodec();
     return (
-      "key=" +
-      (e.key || "") +
-      "&src=" +
-      (e.src || "") +
-      "&hl=" +
-      (e.hl || "") +
-      "&v=" +
-      (e.v || "") +
-      "&r=" +
-      (e.r || "") +
-      "&c=" +
-      (a || "") +
-      "&f=" +
-      (e.f || "") +
-      "&ssml=" +
-      (e.ssml || "") +
-      "&b64=true"
+        "key=" +
+        (e.key || "") +
+        "&src=" +
+        (e.src || "") +
+        "&hl=" +
+        (e.hl || "") +
+        "&v=" +
+        (e.v || "") +
+        "&r=" +
+        (e.r || "") +
+        "&c=" +
+        (a || "") +
+        "&f=" +
+        (e.f || "") +
+        "&ssml=" +
+        (e.ssml || "") +
+        "&b64=true"
     );
   },
   _detectCodec: function () {
@@ -108,6 +108,10 @@ const VoiceRSS = {
   },
 };
 
+function toggleButton() {
+  button.disabled = !button.disabled;
+}
+
 // Passing a joke to VoiceRSS API
 
 function tellMe(joke) {
@@ -138,11 +142,18 @@ async function getJokes() {
     } else {
       joke = data.joke;
     }
+    // Text to Speech
     tellMe(joke);
+
+    // Disable Button
+    toggleButton();
   } catch (error) {
     // Catch errors here
     console.log("whoops", error);
   }
 }
 
-getJokes();
+// Add event listener for button
+
+button.addEventListener("click", getJokes);
+audioElement.addEventListener("ended", toggleButton);
