@@ -52,23 +52,23 @@ const VoiceRSS = {
   _buildRequest: function (e) {
     var a = e.c && "auto" != e.c.toLowerCase() ? e.c : this._detectCodec();
     return (
-        "key=" +
-        (e.key || "") +
-        "&src=" +
-        (e.src || "") +
-        "&hl=" +
-        (e.hl || "") +
-        "&v=" +
-        (e.v || "") +
-        "&r=" +
-        (e.r || "") +
-        "&c=" +
-        (a || "") +
-        "&f=" +
-        (e.f || "") +
-        "&ssml=" +
-        (e.ssml || "") +
-        "&b64=true"
+      "key=" +
+      (e.key || "") +
+      "&src=" +
+      (e.src || "") +
+      "&hl=" +
+      (e.hl || "") +
+      "&v=" +
+      (e.v || "") +
+      "&r=" +
+      (e.r || "") +
+      "&c=" +
+      (a || "") +
+      "&f=" +
+      (e.f || "") +
+      "&ssml=" +
+      (e.ssml || "") +
+      "&b64=true"
     );
   },
   _detectCodec: function () {
@@ -107,6 +107,7 @@ const VoiceRSS = {
     throw "The browser does not support HTTP request";
   },
 };
+//  Toggle Joke button on and off
 
 function toggleButton() {
   button.disabled = !button.disabled;
